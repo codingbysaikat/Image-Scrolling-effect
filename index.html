@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Scrolling Image</title>
+    <style>
+        /* styles.css */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.image-container {
+    width: 300px; /* আপনার ইমেজের কন্টেইনারের প্রস্থ */
+    height: 200px; /* আপনার ইমেজের কন্টেইনারের উচ্চতা */
+    overflow: hidden; /* ইমেজের বাইরের অংশ লুকানোর জন্য */
+    position: relative;
+}
+
+.scroll-image {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 1s linear; /* স্মুথ স্ক্রলিং এর জন্য */
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="./test.png" alt="Scrolling Image" class="scroll-image">
+    </div>
+    <script>
+        // script.js
+const imageContainer = document.querySelector('.image-container');
+const scrollImage = document.querySelector('.scroll-image');
+
+imageContainer.addEventListener('mouseenter', () => {
+    scrollImage.style.transition='transform 30s linear';
+    const imageHeight = scrollImage.clientHeight;
+    const containerHeight = imageContainer.clientHeight;
+    const scrollDistance = imageHeight - containerHeight;
+    
+
+    // অটো স্ক্রল শুরু
+    scrollImage.style.transform = `translateY(-${scrollDistance}px)`;
+});
+
+imageContainer.addEventListener('mouseleave', () => {
+    // ইমেজকে আবার উপরে নিয়ে আসা
+    scrollImage.style.transform = 'translateY(0)';
+    scrollImage.style.transition='transform 1s linear';
+});
+
+    </script>
+</body>
+</html>
